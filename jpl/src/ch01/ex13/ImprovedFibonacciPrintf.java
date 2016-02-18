@@ -4,7 +4,7 @@
 package ch01.ex13;
 
 /**
- * @author mary mogreen
+ * @author mary-mogreen
  *
  */
 public class ImprovedFibonacciPrintf {
@@ -14,7 +14,7 @@ public class ImprovedFibonacciPrintf {
 	/**
 	 * 偶数要素に’＊’をつけて、フィボナッチ数列の
 	 * 最初の方の要素を表示する。
-	 * Stringオブジェクトを作成して配列に入れるようにしてみる。
+	 * Stringオブジェクトを作成して配列に入れるようにしてみてください（←この問題の意味がわかりませんでした）。
 	 */
 	public static void main(String[] args) {
 		int lo = 0,

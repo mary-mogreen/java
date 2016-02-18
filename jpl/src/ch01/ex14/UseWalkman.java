@@ -4,7 +4,7 @@
 package ch01.ex14;
 
 /**
- * @author mery-mogreen
+ * @author mary-mogreen
  *
  */
 public class UseWalkman {

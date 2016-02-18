@@ -38,6 +38,22 @@ public class Walkman2 extends Walkman {
 	}
 
 	/**
+	 *
+	 */
+	@Override
+	public Jack getJack() {
+		return null;
+	}
+
+	/**
+	 *
+	 */
+	@Override
+	public boolean hasJack() {
+		return false;
+	}
+
+	/**
 	 * 端子番号に対応する端子を返す
 	 * @param jackNumber
 	 * @return
@@ -45,6 +61,8 @@ public class Walkman2 extends Walkman {
 	public Jack getJack(int jackNumber) {
 		return jacks[jackNumber];
 	}
+
+
 
 	/**
 	 * Jackに挿す
@@ -71,5 +89,21 @@ public class Walkman2 extends Walkman {
 		} else {
 			System.out.println("ささっていません");
 		}
+	}
+
+	/**
+	 * Jacksを返す
+	 * @return
+	 */
+	public Jack [] getJacks() {
+		return jacks;
+	}
+
+	/**
+	 * hasJacksかどうか
+	 * @return
+	 */
+	public boolean [] hasJacks() {
+		return hasJacks;
 	}
 }

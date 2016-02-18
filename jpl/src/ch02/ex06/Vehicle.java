@@ -16,6 +16,9 @@ public class Vehicle {
 
 	public static long nextID = 0; // 次の識別番号
 
+	/**
+	 * Vehicleの情報を表示する
+	 */
 	public void printVehicleInfo() {
 		System.out.println("===== ID: " + id + " =====");
 		System.out.println("Owner: " + name);

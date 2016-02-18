@@ -4,7 +4,7 @@
 package ch01.ex15;
 
 /**
- * @author mery-mogreen
+ * @author mary-mogreen
  *
  */
 public interface ExtendedLookup extends Lookup {

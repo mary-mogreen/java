@@ -4,7 +4,7 @@
 package ch01.ex14;
 
 /**
- * @author mery-mogreen
+ * @author mary-mogreen
  * 3代目のウォークマン
  * 2端子を用いて、双方向のコミュニケーションがとれる
  */

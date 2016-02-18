@@ -35,6 +35,9 @@ public class LinkedList {
 		this.next = next;
 	}
 
+	/**
+	 * toString
+	 */
 	public String toString() {
 		String desc = "this: " + value + "\n";
 		if (next != null)

@@ -4,7 +4,7 @@
 package ch01.ex10;
 
 /**
- * @author p000526463
+ * @author mary-mogreen
  *
  */
 public class FibonacciNumber {

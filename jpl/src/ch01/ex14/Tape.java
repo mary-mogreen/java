@@ -1,5 +1,11 @@
 package ch01.ex14;
 
+/**
+ *
+ * @author mary-mogreen
+ *
+ */
+
 public class Tape {
 	private String songs;
 
@@ -20,6 +26,7 @@ public class Tape {
 
 	/**
 	 * 曲を書き込む
+	 * @param songs
 	 */
 	public void setSongs(String songs) {
 		this.songs = songs;

@@ -43,4 +43,20 @@ public class Walkman {
 		this.jack = null;
 		this.hasJack = false;
 	}
+
+	/**
+	 * jackを返す
+	 * @return
+	 */
+	public Jack getJack() {
+		return jack;
+	}
+
+	/**
+	 * jackにささっているか
+	 * @boolean
+	 */
+	public boolean hasJack() {
+		return hasJack;
+	}
 }

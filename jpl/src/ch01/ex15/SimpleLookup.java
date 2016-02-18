@@ -4,7 +4,7 @@
 package ch01.ex15;
 
 /**
- * @author mery-mogreen
+ * @author mary-mogreen
  *
  */
 public class SimpleLookup implements ExtendedLookup {
@@ -13,6 +13,11 @@ public class SimpleLookup implements ExtendedLookup {
 	private String[] names = new String[MAX];
 	private Object[] values = new Object[MAX];
 
+	/**
+	 * 名前から探す
+	 * @param name
+	 * @return {Object}
+	 */
 	public Object find(String name) {
 		for (int i = 0; i < names.length; i++) {
 			if (name.equals(names[i]))
@@ -21,6 +26,11 @@ public class SimpleLookup implements ExtendedLookup {
 		return null;
 	}
 
+	/**
+	 * 名前と値を設定する
+	 * @param name
+	 * @param value
+	 */
 	public void add(String name, Object value) {
 		for (int i = 0; i < names.length; i++) {
 			if (names[i] == null) {
@@ -32,6 +42,10 @@ public class SimpleLookup implements ExtendedLookup {
 		System.out.println("can not add (" + name + ": " + value + ")");
 	}
 
+	/**
+	 * 名前から削除する
+	 * @param name
+	 */
 	public Object remove(String name) {
 		for (int i = 0; i < names.length; i++) {
 			if (name.equals(names[i])) {

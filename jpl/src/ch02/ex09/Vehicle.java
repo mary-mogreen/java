@@ -31,6 +31,9 @@ public class Vehicle {
 
 	public static long nextID = 0; // 次の識別番号
 
+	/**
+	 * Vehicleの情報を表示する
+	 */
 	public void printVehicleInfo() {
 		System.out.println("===== ID: " + id + " =====");
 		System.out.println("Owner: " + name);
@@ -38,6 +41,10 @@ public class Vehicle {
 		System.out.println("Angle: " + angle + "°");
 	}
 
+	/**
+	 * 現在の最大の識別番号を返す
+	 * @return 現在の最大の識別番号
+	 */
 	public static long getCurrentMaxID() {
 		return nextID - 1;
 	}

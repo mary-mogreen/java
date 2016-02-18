@@ -4,7 +4,7 @@
 package ch01.ex10;
 
 /**
- * @author yuuya katoh
+ * @author mary-mogreen
  *
  */
 public class ImprovedFibonacci {

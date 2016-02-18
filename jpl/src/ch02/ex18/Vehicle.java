@@ -25,6 +25,7 @@ public class Vehicle {
 
 	/**
 	 * 所有者の名前つき初期化
+	 *
 	 * @param name
 	 */
 	public Vehicle(String name) {
@@ -46,6 +47,7 @@ public class Vehicle {
 
 	/**
 	 * 現在の識別番号でもっとも大きな値を返す
+	 *
 	 * @return
 	 */
 	public static long getCurrentMaxID() {
@@ -66,6 +68,7 @@ public class Vehicle {
 
 	/**
 	 * speedのgetter
+	 *
 	 * @return
 	 */
 	public double getSpeed() {
@@ -74,6 +77,7 @@ public class Vehicle {
 
 	/**
 	 * speedのsetter
+	 *
 	 * @param speed
 	 */
 	public void setSpeed(double speed) {
@@ -82,6 +86,7 @@ public class Vehicle {
 
 	/**
 	 * スピードを変更する
+	 *
 	 * @param speed
 	 */
 	public void changeSpeed(double speed) {
@@ -97,6 +102,7 @@ public class Vehicle {
 
 	/**
 	 * angleのgetter
+	 *
 	 * @return
 	 */
 	public double getAngle() {
@@ -105,6 +111,7 @@ public class Vehicle {
 
 	/**
 	 * angleのsetter
+	 *
 	 * @param angle
 	 */
 	public void setAngle(double angle) {
@@ -113,6 +120,7 @@ public class Vehicle {
 
 	/**
 	 * angleを受け取り回転する角度を更新する
+	 *
 	 * @param angle
 	 */
 	public void turn(double angle) {
@@ -121,24 +129,26 @@ public class Vehicle {
 
 	/**
 	 * Vehicle.TURN_LEFT or Vehicle.TURN_RIGHTを受け取る
+	 *
 	 * @param turn
 	 */
 	public void turn(int turn) {
 		switch (turn) {
-			case TURN_LEFT:
-				setAngle((this.angle - 90.0) % 360.0);
-				break;
-			case TURN_RIGHT:
-				setAngle((this.angle + 90.0) % 360.0);
-				break;
-			default:
-				System.out.println("do nothing");
-				break;
+		case TURN_LEFT:
+			setAngle((this.angle - 90.0) % 360.0);
+			break;
+		case TURN_RIGHT:
+			setAngle((this.angle + 90.0) % 360.0);
+			break;
+		default:
+			System.out.println("do nothing");
+			break;
 		}
 	}
 
 	/**
 	 * nameのgetter
+	 *
 	 * @return
 	 */
 	public String getName() {
@@ -147,6 +157,7 @@ public class Vehicle {
 
 	/**
 	 * nameのsetter
+	 *
 	 * @param name
 	 */
 	public void setName(String name) {
@@ -155,6 +166,7 @@ public class Vehicle {
 
 	/**
 	 * idのgetter
+	 *
 	 * @return
 	 */
 	public long getId() {
