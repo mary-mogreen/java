@@ -1,7 +1,7 @@
 /**
  *
  */
-package ch03.ex06;
+package ch04.ex01;
 
 /**
  * @author mary-mogreen

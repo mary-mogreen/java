@@ -1,13 +1,14 @@
 /**
  *
  */
-package ch03.ex06;
+package ch03.ex08;
 
 /**
  * @author mary-mogreen
- * 3.6 EnergySource追加
+ * 3.8 Cloneble追加
+ *
  */
-public class Vehicle {
+public class Vehicle implements Cloneable {
 	private double speed = 0.0; // 速度(km/h)
 	private double angle = 0.0; // 方向(°)
 	private String owner; // 所有者の名前
@@ -16,6 +17,8 @@ public class Vehicle {
 
 	static final int TURN_LEFT = 0;
 	static final int TURN_RIGHT = 1;
+
+	private boolean isCloned = false;
 
 	/**
 	 * 初期化
@@ -82,9 +85,10 @@ public class Vehicle {
 	public String toString() {
 		String desc = "ID: " + id;
 		if (owner != null)
-			desc += "(owner: " + owner + ") / ";
-		desc += "speed: " + speed + "km/h / ";
-		desc += "angle: " + angle + "°";
+			desc += "(owner: " + owner + ") \n";
+		desc += "speed: " + speed + "km/h \n";
+		desc += "angle: " + angle + "° \n";
+		desc += "isCloned: " + isCloned + "\n";
 		return desc;
 	}
 
@@ -197,7 +201,7 @@ public class Vehicle {
 
 	/**
 	 * 3.6 追加
-	 * EnergySourceが空でない事を保証する
+	 * EnergySourceが空でない事を保障する
 	 */
 	public void start() {
 		if (energySource.empty()) {
@@ -216,18 +220,45 @@ public class Vehicle {
 		this.energySource.setEnergy(energy);
 	}
 
-	public static void main(String[] args) {
-		Vehicle v = new Vehicle(new GasTank(100L));
-		System.out.println("動力源がないとき：");
-		v.start();
-		System.out.println("動力源追加後");
+
+	/**
+	 * cloneメソッド。複製はできる。クローンされたことが残る。
+	 * @throws CloneNotSupportedException
+	 */
+	public Vehicle clone() {
 		try {
-			v.charge(99L);
-			v.start();
-		} catch (CapacityOverException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
+			Vehicle copy = (Vehicle) super.clone();
+			copy.setCloned(true);
+			return copy;
+
+		} catch (CloneNotSupportedException e) {
+			throw new InternalError(e.toString());
 		}
+	}
+
+	/**
+	 * 複製されたかどうかを返す
+	 * @return
+	 */
+	public boolean isCloned() {
+		return isCloned;
+	}
+
+	/**
+	 * 自クラス及びサブクラスで複製時に複製されたことを設定するためのもの。
+	 * @param isCloned
+	 */
+	protected void setCloned(boolean isCloned) {
+		this.isCloned = isCloned;
+	}
+
+	public static void main(String[] args) {
+		Vehicle v = new Vehicle("Mary", new GasTank(100L));
+		Vehicle copy = v.clone();
+
+
+		System.out.println("V: " + v);
+		System.out.println("Copy: " + copy);
 
 	}
 }

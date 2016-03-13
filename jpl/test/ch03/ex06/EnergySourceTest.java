@@ -23,7 +23,6 @@ public class EnergySourceTest {
 		// Lで最大容量を設定
 		EnergySource gt = new GasTank(1000);
 		assertThat(gt.empty(), is(true));
-		//
 		gt.setEnergy(10);
 		assertThat(gt.empty(), is(false));
 		assertThat(gt.getEnergy(), is(10L));
