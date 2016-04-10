@@ -1,7 +1,7 @@
 /**
  *
  */
-package ch07.ex03;
+package ch09.ex03;
 
 /**
  * @author mary-mogreen
@@ -10,6 +10,7 @@ package ch07.ex03;
 public class PascalTriangles {
 	/**
 	 * パスカルの三角形配列を返す
+	 * 前回のもの
 	 * @param depth
 	 * @return
 	 */
@@ -25,6 +26,34 @@ public class PascalTriangles {
 			}
 		}
 		return pascalTriangles;
+	}
+
+	/**
+	 * パスカルの三角形を表示するだけのもの（配列使っていない）
+	 * @param a
+	 */
+	public static void p(int a) {
+		for (int c = 1; c <= a; c++) {
+			for (int n = c, m = 0, k = 0; n > 0; n--, m++)
+				System.out.printf("%d ", k == 0 ? k = 1 : (k = k * n / m));
+			System.out.println("");
+		}
+	}
+
+	/**
+	 * 【新しい】パスカルの三角形の配列を作成する
+	 * 演算子を利用
+	 * @param a
+	 * @return
+	 */
+	public static int[][] pa(int a) {
+		int[][] pt = new int[a][];
+		for (int c = 1; c <= a; c++) {
+			pt[c - 1] = new int[c];
+			for (int n = c, m = 0, k = 0; n > 0; n--, m++)
+				pt[c - 1][m] = k == 0 ? k = 1: (k = k * n / m);
+		}
+		return pt;
 	}
 
 	/**
@@ -44,7 +73,7 @@ public class PascalTriangles {
 	 * @param depth
 	 */
 	public static void showPascalTriangles(int depth) {
-		showPascalTriangles(createPascalTriangles(depth));
+		showPascalTriangles(pa(depth));
 	}
 
 	/**
@@ -52,10 +81,10 @@ public class PascalTriangles {
 	 */
 	public static void main(String[] args) {
 
-		//showPascalTriangles(-1);
+		//pt.showPascalTriangles(-1);
+		p(12);
+
 		showPascalTriangles(12);
-		showPascalTriangles(20);
-		showPascalTriangles(5);
 
 
 	}
