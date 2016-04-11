@@ -1,39 +1,56 @@
 package src;
 
-import java.awt.Choice;
-import java.awt.Color;
 import java.awt.Dialog;
 import java.awt.Frame;
+import java.awt.GridLayout;
+import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class PropertyDialog
 	extends Dialog
-	implements ActionListener, ItemListener {
+	implements ActionListener {
 
 	Properties props;
 
 	PropertyDialog(Frame frame, Properties props) {
 		super(frame, "Property");
 		this.props = props;
-		setSize(300, 150);
+		setSize(500, 400);
 		setVisible(true);
-		Choice c = new Choice();
-	    c.add("black");
-	    c.add("white");
-	    c.add("red");
-	    c.add("blue");
-	    c.add("yellow");
-	    c.add("green");
-	    c.add("pink");
-	    c.add("orange");
-	    c.add("gray");
-	    add(c);
-	    c.addItemListener(this);
+		setLayout(new GridLayout(1, 1));
+
+
+
+		Panel font = new Panel();
+		font.setLayout(new GridLayout(2, 1));
+
+		Panel fontConfig = new Panel();
+		fontConfig.setLayout(new GridLayout(5, 1));
+		BackgroundColorSelector bcs = new BackgroundColorSelector(props);
+		add(bcs);
+		fontConfig.add(bcs);
+
+		ColorSelector cs = new ColorSelector(props);
+	    fontConfig.add(cs);
+
+
+	    FontSizer fs = new FontSizer(props);
+	    fontConfig.add(fs);
+
+	    FontFamilySelector ffs = new FontFamilySelector(props);
+	    fontConfig.add(ffs);
+
+	    FontStyleSelector fss = new FontStyleSelector(props);
+	    fontConfig.add(fss);
+
+	    //font.add(new Label("Font"));
+	    //font.add(fontConfig);
+
+	    add(fontConfig);
+
 		addWindowListener(new WindowAdapter() {
     		public void windowClosing(WindowEvent e) {
     			dispose();
@@ -45,41 +62,5 @@ public class PropertyDialog
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		dispose();
-	}
-
-	@Override
-	public void itemStateChanged(ItemEvent e) {
-		Choice choice = (Choice)e.getItemSelectable();
-		switch(choice.getSelectedItem()) {
-			case "black":
-				props.setColor(Color.BLACK);
-				break;
-			case "white":
-				props.setColor(Color.WHITE);
-				break;
-			case "red":
-				props.setColor(Color.RED);
-				break;
-			case "blue":
-				props.setColor(Color.BLUE);
-				break;
-			case "yellow":
-				props.setColor(Color.YELLOW);
-				break;
-			case "green":
-				props.setColor(Color.GREEN);
-				break;
-			case "orange":
-				props.setColor(Color.ORANGE);
-				break;
-			case "pink":
-				props.setColor(Color.PINK);
-				break;
-			case "gray":
-				props.setColor(Color.GRAY);
-				break;
-			default:
-				//Nothing.
-		}
 	}
 }
