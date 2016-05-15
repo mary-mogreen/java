@@ -82,13 +82,13 @@ public class FontSizer extends Panel {
 
 	}
 
-	private Properties props;
+	private WatchProperties props;
 	private String fontSize;
 	private TextField tf;
 	private Button upButton;
 	private Button downButton;
 
-	public FontSizer(Properties props) {
+	public FontSizer(WatchProperties props) {
 		super();
 		this.props = props;
 		this.fontSize = "" + props.getFontSize();

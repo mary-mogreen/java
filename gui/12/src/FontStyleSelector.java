@@ -50,9 +50,9 @@ public class FontStyleSelector extends Panel {
 
 	private CheckboxGroup checkboxGroup;
 	private Checkbox[] cb;
-	private Properties props;
+	private WatchProperties props;
 
-	public FontStyleSelector(Properties props) {
+	public FontStyleSelector(WatchProperties props) {
 		super();
 		this.props = props;
 

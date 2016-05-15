@@ -50,8 +50,8 @@ public class FontFamilySelector extends Panel {
 	}
 
 	private Choice selector;
-	private Properties props;
-	public FontFamilySelector(Properties props) {
+	private WatchProperties props;
+	public FontFamilySelector(WatchProperties props) {
 		this.props = props;
 		selector = new Choice();
 

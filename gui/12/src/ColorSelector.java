@@ -17,8 +17,8 @@ import java.awt.event.ItemListener;
  */
 public class ColorSelector extends Panel implements ItemListener {
 	private Choice selector;
-	private Properties props;
-	public ColorSelector(Properties props) {
+	private WatchProperties props;
+	public ColorSelector(WatchProperties props) {
 		this.props = props;
 		selector = new Choice();
 		selector.add("black");
