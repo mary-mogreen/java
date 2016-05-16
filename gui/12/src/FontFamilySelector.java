@@ -50,16 +50,16 @@ public class FontFamilySelector extends Panel {
 	}
 
 	private Choice selector;
-	private WatchProperties props;
-	public FontFamilySelector(WatchProperties props) {
-		this.props = props;
+	private Properties props;
+	public FontFamilySelector(Properties props2) {
+		this.props = props2;
 		selector = new Choice();
 
 		selector.add("Serif");
 		selector.add("SansSerif");
 	    selector.add("Monospaced");
 
-	    selector.select(props.getFontFamily());
+	    selector.select(props2.getFontFamily());
 	    setLayout(new GridLayout(2, 1));
 	    add(new Label("font family"));
 	    add(selector);

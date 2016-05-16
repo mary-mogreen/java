@@ -13,9 +13,9 @@ public class PropertyDialog
 	extends Dialog
 	implements ActionListener {
 
-	WatchProperties props;
+	Properties props;
 
-	PropertyDialog(Frame frame, WatchProperties props) {
+	PropertyDialog(Frame frame, Properties props) {
 		super(frame, "Property");
 		this.props = props;
 		setSize(500, 400);

@@ -37,7 +37,7 @@ public class Watch2 extends Frame implements Runnable, ActionListener{
 	Image back;
 	Graphics buffer;
 	Dialog dialog;
-	WatchProperties props;
+	Properties props;
 	String time;
 
     public static void main(String args[]) {
@@ -55,7 +55,7 @@ public class Watch2 extends Frame implements Runnable, ActionListener{
 
     public Watch2(String title) {
     	super(title);
-    	props = new WatchProperties();
+    	props = new Properties();
     	MenuBar menubar = new MenuBar();
     	Menu menu = new Menu("設定");
     	MenuItem menuitem = new MenuItem("プロパティ");

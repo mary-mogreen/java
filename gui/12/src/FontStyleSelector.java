@@ -50,11 +50,11 @@ public class FontStyleSelector extends Panel {
 
 	private CheckboxGroup checkboxGroup;
 	private Checkbox[] cb;
-	private WatchProperties props;
+	private Properties props;
 
-	public FontStyleSelector(WatchProperties props) {
+	public FontStyleSelector(Properties props2) {
 		super();
-		this.props = props;
+		this.props = props2;
 
 		checkboxGroup = new CheckboxGroup();
 		cb = new Checkbox[3];
@@ -66,7 +66,7 @@ public class FontStyleSelector extends Panel {
 		cb[Font.ITALIC].setCheckboxGroup(checkboxGroup);
 		cb[Font.BOLD].setCheckboxGroup(checkboxGroup);
 
-		cb[props.getFontStyle()].setState(true);
+		cb[props2.getFontStyle()].setState(true);
 		cb[Font.PLAIN].addItemListener(new CbItemListener());
 		cb[Font.ITALIC].addItemListener(new CbItemListener());
 		cb[Font.BOLD].addItemListener(new CbItemListener());

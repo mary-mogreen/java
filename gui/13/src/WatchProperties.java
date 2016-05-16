@@ -17,6 +17,20 @@ public class WatchProperties {
 	private int fontSize;
 	private String fontFamily;
 	private int fontStyle;
+	private Font font;
+
+	private static WatchProperties instance;
+
+	private WatchProperties() {
+		init();
+	}
+
+	public static WatchProperties getInstance() {
+		if (instance == null) {
+			instance = new WatchProperties();
+		}
+		return instance;
+	}
 
 	/**
 	 * @return bgColor
@@ -32,15 +46,14 @@ public class WatchProperties {
 		this.bgColor = bgColor;
 	}
 
-	public WatchProperties() {
-		init();
-	}
 
 	public void init() {
 		color = Color.LIGHT_GRAY;
 		bgColor = Color.DARK_GRAY;
 		flipColor = new Color(100, 50, 200);
-		fontSize = 32;
+		//font = new Font(Font.SANS_SERIF, Font.BOLD, 120);
+		font = Font.decode("jokerman").deriveFont(Font.BOLD, 120.0f);
+		fontSize = 120;
 		fontFamily = Font.MONOSPACED;
 		fontStyle = Font.PLAIN;
 	}
@@ -61,12 +74,12 @@ public class WatchProperties {
 		this.fontSize = fontSize;
 	}
 
-	public String getFontFamily() {
-		return fontFamily;
+	public Font getFontFamily() {
+		return font;
 	}
 
-	public void setFontFamily(String fontFamily) {
-		this.fontFamily = fontFamily;
+	public void setFontFamily(Font font) {
+		this.font = font;
 	}
 
 	/**
@@ -82,4 +95,13 @@ public class WatchProperties {
 	public void setFontStyle(int fontStyle) {
 		this.fontStyle = fontStyle;
 	}
+
+	public Color getFlipColor() {
+		return flipColor;
+	}
+	public void setFlipColor(Color color) {
+		flipColor = color;
+	}
+
+
 }
