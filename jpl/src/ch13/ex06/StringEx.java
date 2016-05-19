@@ -90,7 +90,7 @@ public class StringEx {
 	 * @return 10進数が右から区切り桁数ごとに区切り文字で区切られた文字列で置き換えられた文字列
 	 * @exception IllegalArgumentException 桁数が不正（0以下）
 	 */
-	public static String insertDelimiter(String str, int digit, String separator) throws IllegalArgumentException  {
+	public static String insertDelimiter(String str, int digit, String separator) {
 		if (digit < 1)
 			throw new IllegalArgumentException("Illegal digit: " + digit);
 		StringBuffer buf = new StringBuffer();
