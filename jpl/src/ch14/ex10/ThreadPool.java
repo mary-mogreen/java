@@ -72,6 +72,7 @@ public class ThreadPool {
     public synchronized void stop() {
     	if (!isStarted)
     		throw new IllegalStateException("threads has not been started.");
+    	isStarted = false;
     	for (WorkerThread wt: threads) {
 			wt.stopThread();
 			try {
@@ -79,7 +80,6 @@ public class ThreadPool {
 			} catch (InterruptedException e) {
 			}
     	}
-    	isStarted = false;
     }
 
     /**
@@ -133,12 +133,13 @@ public class ThreadPool {
      * @author mary-mogreen
      *
      */
-    private class WorkQueue {
+    private static class WorkQueue {
     	private final int queueSize;
-    	private LinkedList<Runnable> queue = new LinkedList<Runnable>();
+    	private LinkedList<Runnable> queue;
 
     	WorkQueue(int queueSize) {
     		this.queueSize = queueSize;
+    		queue = new LinkedList<Runnable>();
     	}
 
     	/**
@@ -166,7 +167,7 @@ public class ThreadPool {
          * @return Runnable Object.
          */
     	synchronized Runnable poll() {
-    		while (queue.isEmpty()) {
+    		if (queue.isEmpty()) {
     			try {
 					wait();
 				} catch (InterruptedException e) {
@@ -178,7 +179,7 @@ public class ThreadPool {
     		return r;
     	}
 
-    	void stop() {
+    	synchronized void stop() {
     		notifyAll();
     	}
     }

@@ -230,6 +230,7 @@ public class TestThreadPool {
 		Runnable task = new Runnable() {
 			@Override
 			public void run() {
+				System.out.println(Thread.currentThread().toString());
 				threads.add(Thread.currentThread());
 				try {
 					Thread.sleep(500); // wait for a while
@@ -246,8 +247,8 @@ public class TestThreadPool {
 			tp.dispatch(task);
 
 		// By the specification, stop() will wait for the terminations of all threads.
-		tp.stop();
 
+		tp.stop();
 		assertEquals(numberOfThreads, threads.size());
 	}
 
