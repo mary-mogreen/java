@@ -224,13 +224,15 @@ public class TestThreadPool {
 		tp.stop();
 	}
 
+	// memo
+	// これだけまれにテスト失敗する。
+	// 後で直す
 	@Test
 	public void testNumberOfThreads() {
 		final Set<Thread> threads = Collections.synchronizedSet(new HashSet<Thread>());
 		Runnable task = new Runnable() {
 			@Override
 			public void run() {
-				System.out.println(Thread.currentThread().toString());
 				threads.add(Thread.currentThread());
 				try {
 					Thread.sleep(500); // wait for a while
