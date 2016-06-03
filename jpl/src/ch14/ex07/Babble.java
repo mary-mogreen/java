@@ -6,6 +6,7 @@ package ch14.ex07;
 /**
  * @author mary-mogreen
  *
+ * true 2 Did DidNot
  * Windows
  * 1. Did Did DidNot DidNot
  * 2. Did Did DidNot DidNot
@@ -13,7 +14,12 @@ package ch14.ex07;
  * 4. Did Did DidNot DidNot
  * 5. Did DidNot Did DidNot
  *
- * できれば後でMacで試す
+ * Mac
+ * 1. Did DidNot Did DidNot
+ * 2. Did Did DidNot DidNot
+ * 3. Did Did DidNot DidNot
+ * 4. Did Did DidNot DidNot
+ * 5. Did Did DidNot DidNot
  */
 public class Babble extends Thread {
 
