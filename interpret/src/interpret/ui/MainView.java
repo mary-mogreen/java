@@ -10,25 +10,44 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
+import interpret.data.InstanceData;
 
 /**
  * @author katouyuuya
  *
  */
 public class MainView {
-	private JSplitPane main;
+	private static MainView instance;
 	
-	public MainView() {
+	private JSplitPane main;
+	private JPanel instanceListView;
+	private JTabbedPane instanceView;
+	private JPanel fieldView;
+	private JPanel methodView;
+	private JPanel arrayElementView;
+	private JPanel fieldAndArrElmView;
+	
+	public static MainView getInstance() {
+		if (instance == null)
+			instance = new MainView();
+		return instance;
+	}
+	
+	
+	private MainView() {
 		
 		EmptyBorder border = new EmptyBorder(0, 0, 0, 0);
 		
 		main = new JSplitPane();
 		
 		// left 1
-		JPanel ivp = new JPanel(); // Instance View
-		ivp.setBackground(Color.WHITE);
+		instanceListView = new JPanel(); // Instance List View
+		instanceListView.setBackground(Color.WHITE);
 		JLabel ivl = new JLabel("Instance Viewer");
-		ivp.add(ivl);
+		instanceListView.add(ivl);
 		
 		// right 1
 		JSplitPane operate = new JSplitPane(); // 操作部
@@ -37,32 +56,55 @@ public class MainView {
 		JSplitPane split = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
 		
 		// top
-		JTabbedPane instanceView = new InstanceView().getInstanceView(); // Object & Array Viewer
+		instanceView = InstanceView.getInstance().getView(); // Object & Array Viewer
 		instanceView.setBackground(Color.MAGENTA);
 		
 		// bottom
-		JPanel fvp = new JPanel(); // Object & Array Viewer
-		fvp.setBackground(Color.CYAN);
-		JLabel fvl = new JLabel("Field Viewer");
-		fvp.add(fvl);
+		fieldAndArrElmView = new JPanel(); // Field & Array Elements Viewer
+		fieldAndArrElmView.setBackground(Color.CYAN);
+		fieldView = new FieldView().getPanel();
+		fieldAndArrElmView.add(fieldView);
 		
 		// right 1-2
-		JPanel mvp = new JPanel(); // Method Viewer
-		mvp.setBackground(Color.YELLOW);
+		methodView = new JPanel(); // Method Viewer
+		methodView.setBackground(Color.YELLOW);
 		JLabel mvl = new JLabel("Method Viewr");
-		mvp.add(mvl);
+		methodView.add(mvl);
 		
 		split.setTopComponent(instanceView);
-		split.setBottomComponent(fvp);
+		split.setBottomComponent(fieldAndArrElmView);
 		operate.setLeftComponent(split);
-		operate.setRightComponent(mvp);
+		operate.setRightComponent(methodView);
 		
-		main.setLeftComponent(ivp);
+		main.setLeftComponent(instanceListView);
 		main.setRightComponent(operate);
 		
 		split.setBorder(border);
-		operate.setBorder(border);
-		
+		operate.setBorder(border);	
+	}
+	
+	public void update() {
+		System.out.println("");
+		InstanceData id = InstanceData.getInstance();
+		int currentIdx = instanceView.getSelectedIndex();
+		System.out.println("currentIdx: " + currentIdx );
+		if (currentIdx != -1) {
+			String insName = instanceView.getTitleAt(currentIdx);
+			System.out.println("insName: " + insName);
+			Object obj = id.get(insName);
+			System.out.println("obj: " + (obj==null ? "null" : obj.toString()));
+			fieldAndArrElmView.removeAll();
+			if ("Object".equals((String)obj)) {
+				fieldView = new FieldView().getPanel();
+				fieldAndArrElmView.add(fieldView);
+			} else if ("Array".equals(((String)obj))) {
+				arrayElementView = new ArrayElementView().getPanel();
+				fieldAndArrElmView.add(arrayElementView);
+			} else {
+				fieldAndArrElmView.repaint();;
+				System.out.println("消したはずなんですけど・・・・。");
+			}
+		}
 	}
 	
 	public JSplitPane getMainPane() {

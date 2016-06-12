@@ -7,6 +7,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import interpret.actionlistener.AddTabActionListener;
+
 /**
  * @author katouyuuya
  *
@@ -24,7 +26,9 @@ public class InterpretMenu {
 	    menubar.add(menu2);
 
 	    JMenuItem menuitem1 = new JMenuItem("Object");
+	    menuitem1.addActionListener(new AddTabActionListener("new ClassObject", InstanceView.OBJECT_GENERATOR));
 	    JMenuItem menuitem2 = new JMenuItem("Array");
+	    menuitem2.addActionListener(new AddTabActionListener("new Array", InstanceView.ARRAY_GENERATOR));
 
 	    menu1.add(menuitem1);
 	    menu1.add(menuitem2);

@@ -7,6 +7,8 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JSplitPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import interpret.ui.InterpretMenu;
 import interpret.ui.MainView;
@@ -35,10 +37,10 @@ public class InterpretApp extends JFrame {
 		InterpretMenu menu = new InterpretMenu();
 		app.setJMenuBar(menu.getMenuBar());
 		
-		JSplitPane main = new MainView().getMainPane();		
-		app.getContentPane().add(main, BorderLayout.CENTER);
+		MainView mainView = MainView.getInstance();
+		mainView.update();
+		app.getContentPane().add(mainView.getMainPane(), BorderLayout.CENTER);
 		
 		app.setVisible(true);
 	}
-
 }

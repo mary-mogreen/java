@@ -22,6 +22,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import interpret.actionlistener.CloseTabActionListener;
+
 /**
  * @author katouyuuya
  * JTabbedPaneを拡張して閉じることができるTabbedPaneを実装。
@@ -69,7 +71,7 @@ public class ClosableTabbedPane extends JTabbedPane {
 	
 	
 	
-	class TabPanel extends JPanel {
+	public class TabPanel extends JPanel {
 	    private static final int PREFERRED_TAB_WIDTH = 80;
 	    private final JButton button = new JButton(new CloseTabIcon()) {
 	        @Override
@@ -91,24 +93,14 @@ public class ClosableTabbedPane extends JTabbedPane {
 	            return new Dimension(PREFERRED_TAB_WIDTH - bw, dim.height);
 	        }
 	    };
-	    protected TabPanel(final JTabbedPane pane, String title, final Component content) {
+	    public TabPanel(final JTabbedPane pane, String title, final Component content) {
 	        super(new BorderLayout());
 	        setOpaque(false);
 
 	        label.setText(title);
 	        label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 1));
 
-	        button.addActionListener(new ActionListener() {
-	            @Override public void actionPerformed(ActionEvent e) {
-	                int idx = pane.indexOfComponent(content);
-	                pane.removeTabAt(idx);
-	                int count = pane.getTabCount();
-	                if (count > idx) {
-	                    TabPanel tab = (TabPanel) pane.getTabComponentAt(idx);
-	                    tab.setButtonVisible(true);
-	                }
-	            }
-	        });
+	        button.addActionListener(new CloseTabActionListener(pane, content));
 	        add(label);
 	        add(button, BorderLayout.EAST);
 	    }
