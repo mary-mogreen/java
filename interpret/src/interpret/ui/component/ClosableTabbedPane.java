@@ -9,8 +9,6 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseMotionListener;
@@ -22,12 +20,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-import interpret.actionlistener.CloseTabActionListener;
+import interpret.ui.Creator;
 
 /**
  * @author katouyuuya
  * JTabbedPaneを拡張して閉じることができるTabbedPaneを実装。
  */
+@SuppressWarnings("serial")
 public class ClosableTabbedPane extends JTabbedPane {
 	private transient MouseMotionListener hoverHandler;
 	
@@ -67,12 +66,14 @@ public class ClosableTabbedPane extends JTabbedPane {
 	public void addTab(String title, final Component content) {
 		super.addTab(title, content);
 		setTabComponentAt(getTabCount() - 1, new TabPanel(this, title, content));
+		this.fireStateChanged();
 	}
 	
 	
 	
 	public class TabPanel extends JPanel {
 	    private static final int PREFERRED_TAB_WIDTH = 80;
+	    private final Component content;
 	    private final JButton button = new JButton(new CloseTabIcon()) {
 	        @Override
 	        public void updateUI() {
@@ -96,16 +97,33 @@ public class ClosableTabbedPane extends JTabbedPane {
 	    public TabPanel(final JTabbedPane pane, String title, final Component content) {
 	        super(new BorderLayout());
 	        setOpaque(false);
-
-	        label.setText(title);
+	        this.content = content;
+	        setTitle(title);
 	        label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 1));
-
-	        button.addActionListener(new CloseTabActionListener(pane, content));
+	        ((Creator)content).addChangeTitleListener(name -> {
+	        	setTitle(name);
+	        });
+	        button.addActionListener(e -> {
+	        	int idx = pane.indexOfComponent(content);
+	            pane.removeTabAt(idx);
+	            int count = pane.getTabCount();
+	            if (count > idx) {
+	                TabPanel tab = (TabPanel) pane.getTabComponentAt(idx);
+	                tab.setButtonVisible(true);
+	            }
+	        });
 	        add(label);
 	        add(button, BorderLayout.EAST);
 	    }
+	    
+	    public void setTitle(String title) {
+	    	label.setText(title);
+	    }
 	    public void setButtonVisible(boolean flag) {
 	        button.setVisible(flag);
+	    }
+	    public Component getContent() {
+	    	return this.content;
 	    }
 	}
 
