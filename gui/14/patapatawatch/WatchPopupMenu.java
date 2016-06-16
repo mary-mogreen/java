@@ -1,7 +1,7 @@
 /**
  *
  */
-package src;
+package patapatawatch;
 
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;

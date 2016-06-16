@@ -1,4 +1,4 @@
-package src;
+package patapatawatch;
 
 import java.awt.Canvas;
 import java.awt.Color;
@@ -6,11 +6,14 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Panel;
 import java.awt.RenderingHints;
+import java.awt.Window;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferStrategy;
 import java.util.Calendar;
+
 
 @SuppressWarnings("serial")
 public class ClockCanvas extends Canvas implements Runnable {
@@ -19,21 +22,23 @@ public class ClockCanvas extends Canvas implements Runnable {
 	private static final int REFRESH_INTERVAL = 1;
     private static final int BUFFER_SIZE = 2; // Double buffering
     private BufferStrategy bufferStrategy;
-    private Dimension dimension = new Dimension(504, 300);
     private Flip hour1, hour2, minute1, minute2, second1, second2;
     private int flipWidth;
     private int flipHeight;
     private int offsetX = 12;
     private int offsetY = 36;
+    private Panel panel = new Panel();
     private WatchProperties props = WatchProperties.getInstance();
-    AppWindow window;
+    private Dimension dimension = new Dimension(props.getWidth(), props.getHeight());
+    AppFrame frame;
 	private int flipOriginX;
 	private int flipOriginY;
 
 	public ClockCanvas() {
 		setForeground(new Color(0, 255, 0));
         setBackground(new Color(50, 50, 50));
-        window = new AppWindow(this);
+ 
+        this.frame = new AppFrame(this);
         createBufferStrategy(BUFFER_SIZE);
         bufferStrategy = getBufferStrategy();
         flipWidth = 70;
@@ -53,7 +58,6 @@ public class ClockCanvas extends Canvas implements Runnable {
 		int height = flipWidth * 2 + offsetY * 2;
 
 		dimension.setSize(width, height);
-		System.out.println(""+dimension.width+ ", "+ dimension.height);
 	}
 
 	private void draw() {
@@ -61,26 +65,24 @@ public class ClockCanvas extends Canvas implements Runnable {
         int w = getMaxWidth((Graphics2D)graphics);
 		flipWidth = (int) (w);
         resize();
-		window.setSize(dimension);
+		frame.setSize(dimension);
         if (!bufferStrategy.contentsLost()) {
             graphics.clearRect(0, 0, dimension.width, dimension.height);
             ((Graphics2D) graphics).setRenderingHint(
                     RenderingHints.KEY_TEXT_ANTIALIASING,
                     RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-            //graphics = updateClock(graphics);
-            //graphics = updatePataPata(graphics);
-            //setForeground(props.getColor());
-            setBackground(props.getBgColor());
-
+            graphics.setColor(props.getBgColor());
+            graphics.fillRect(0, 0, dimension.width, dimension.height);
             graphics = updateFlip(graphics);
             bufferStrategy.show();
             graphics.dispose();
         }
+        // frame.setBackground(props.getBgColor());
     }
 
 	private Graphics updateFlip(Graphics g) {
+		// ((Graphics2D) g).setBackground(props.getBgColor());
 		Calendar next = Calendar.getInstance();
-		System.out.println(flipWidth);
 		flipOriginX = offsetX + flipWidth / 2;
 		flipOriginY = dimension.height / 2;
 		hour1.resize(flipOriginX, flipOriginY, (int)(flipWidth), (int)(flipWidth));
@@ -121,6 +123,7 @@ public class ClockCanvas extends Canvas implements Runnable {
     public Dimension getMinimumSize() {
         return getPreferredSize();
     }
+ 
 
 	@Override
 	public void run() {
@@ -135,8 +138,5 @@ public class ClockCanvas extends Canvas implements Runnable {
         }
 	}
 
-	public void setWindow(AppWindow appWindow) {
-		this.window = appWindow;
-	}
 
 }

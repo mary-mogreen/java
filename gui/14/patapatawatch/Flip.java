@@ -1,13 +1,11 @@
 /**
  *
  */
-package src;
+package patapatawatch;
 
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
-import patapatawatch.WatchProperties;
 
 /**
  * @author p000526463
@@ -73,7 +71,6 @@ public class Flip {
 		if (now != next)
 			theta = (theta + 6) % 180;
 
-		//System.out.println(theta +", "+ now +", "+ next);
 		double rad = Math.toRadians(theta%180);
 		// 後ろ側
 		g2.setColor(props.getFlipColor());
@@ -140,6 +137,7 @@ public class Flip {
 		//元に戻す
 		//g2.setClip(-flipOriginX, flipOriginY, 370, 300);
 
+		g2.setClip((int)xPoint[0], (int)yPoint[0], width, height * 2);
 		if (theta == 0)
 			this.now = next;
 

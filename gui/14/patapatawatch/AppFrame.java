@@ -1,13 +1,15 @@
 /**
  *
  */
-package src;
+package patapatawatch;
 
 import java.awt.BorderLayout;
+import java.awt.Frame;
 import java.awt.Menu;
 import java.awt.MenuBar;
 import java.awt.MenuItem;
 import java.awt.MenuShortcut;
+import java.awt.Point;
 import java.awt.PopupMenu;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
@@ -19,21 +21,38 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 
+
 /**
  * @author mary-mogreen
  *
  */
 @SuppressWarnings("serial")
-public class AppWindow extends Window implements ActionListener {
+public class AppFrame extends Frame implements ActionListener {
 	ClockCanvas canvas;
 	private MenuItem exitMenu;
 	private int pressedX;
 	private int pressedY;
+	private PropertiesDialog dialog;
+	private MenuBar menubar;
+	private MenuItem menuitem;
+	WatchProperties props = WatchProperties.getInstance();
 
-	public AppWindow(ClockCanvas canvas) {
+	public AppFrame(ClockCanvas canvas) {
 		super(null, null);
 		this.canvas = canvas;
 		
+		// MenuBar
+		menubar = new MenuBar();
+    	Menu menu = new Menu("設定");
+    	MenuItem menuitem = new MenuItem("プロパティ");
+    	menuitem.addActionListener(e -> {
+  			dialog = new PropertiesDialog(this);
+  			dialog.setVisible(true);
+    	});
+    	menu.add(menuitem);
+    	menubar.add(menu);
+    	setMenuBar(menubar);
+
         // Frame configuration
         setLayout(new BorderLayout());
         addWindowListener(new AppCloseAdapter());
@@ -63,8 +82,10 @@ public class AppWindow extends Window implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
         if (source.equals(exitMenu)) {
-            System.out.println();
-            System.exit(0);
+        	props.setDimension(getSize());
+    		props.setLocation(getLocation());
+    		props.update();
+        	System.exit(0);
         }
 	}
 
@@ -106,6 +127,10 @@ public class AppWindow extends Window implements ActionListener {
 class AppCloseAdapter extends WindowAdapter {
 	@Override
     public void windowClosing(WindowEvent e) {
+		WatchProperties props = WatchProperties.getInstance();
+		props.setDimension(e.getWindow().getSize());
+		props.setLocation(e.getWindow().getLocation());
+		props.update();
         System.exit(0);
     }
 }

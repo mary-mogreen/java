@@ -1,6 +1,4 @@
-package src;
-
-import patapatawatch.ClockCanvas;
+package patapatawatch;
 
 public class PataPataWatch {
 
