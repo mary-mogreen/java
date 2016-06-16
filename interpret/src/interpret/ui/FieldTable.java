@@ -7,8 +7,8 @@ import javax.swing.table.AbstractTableModel;
 
 import interpret.ui.component.InterpretLog;
 import interpret.ui.component.ObjectTable;
-import util.Reflection;
-import util.TypedValue;
+import interpret.util.Reflection;
+import interpret.util.TypedValue;
 
 @SuppressWarnings("serial")
 public class FieldTable extends ObjectTable {

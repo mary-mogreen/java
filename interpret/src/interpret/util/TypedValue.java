@@ -1,4 +1,4 @@
-package util;
+package interpret.util;
 
 public class TypedValue implements Cloneable {
 

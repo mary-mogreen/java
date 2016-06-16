@@ -23,7 +23,7 @@ import javax.swing.JTextField;
 import interpret.ObjectData;
 import interpret.listener.ChangeTitleListener;
 import interpret.ui.component.ClassNameField;
-import util.Reflection;
+import interpret.util.Reflection;
 
 /**
  * @author katouyuuya

@@ -6,7 +6,7 @@ import javax.swing.table.AbstractTableModel;
 
 import interpret.ui.component.InterpretLog;
 import interpret.ui.component.ObjectTable;
-import util.TypedValue;
+import interpret.util.TypedValue;
 
 @SuppressWarnings("serial")
 public class ArrayTable extends ObjectTable {

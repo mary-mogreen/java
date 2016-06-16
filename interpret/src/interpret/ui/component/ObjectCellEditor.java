@@ -14,7 +14,7 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
 import interpret.ObjectData;
-import util.TypedValue;
+import interpret.util.TypedValue;
 
 @SuppressWarnings("serial")
 public class ObjectCellEditor extends AbstractCellEditor implements TableCellRenderer, TableCellEditor {

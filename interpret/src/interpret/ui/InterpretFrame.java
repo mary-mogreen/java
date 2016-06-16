@@ -23,6 +23,7 @@ public class InterpretFrame extends JFrame {
 
 		
 		tabPane.addTab("new Object", new ObjectCreator());
+		tabPane.addTab("new Array", new ArrayCreator());
 
 		
 		ActionListener newObjectListener = new ActionListener() {

@@ -4,7 +4,7 @@ import javax.swing.JLabel;
 import javax.swing.table.AbstractTableModel;
 
 import interpret.ui.component.ObjectTable;
-import util.TypedValue;
+import interpret.util.TypedValue;
 
 @SuppressWarnings("serial")
 public class ParamTable extends ObjectTable {

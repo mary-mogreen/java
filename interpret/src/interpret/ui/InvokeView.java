@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import interpret.ui.component.InterpretLog;
-import util.Reflection;
+import interpret.util.Reflection;
 
 /**
  * @author katouyuuya
