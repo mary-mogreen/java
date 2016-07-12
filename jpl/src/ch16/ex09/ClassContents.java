@@ -14,26 +14,41 @@ public class ClassContents {
 	public static void main(String[] args) {
 		try {
 			Class<?> c = Class.forName(args[0]);
-			System.out.println(c);
-			printMembers(removeDuplicateMembers(c.getFields(), c.getDeclaredFields()));
-			printMembers(removeDuplicateMembers(c.getConstructors(), c.getDeclaredConstructors()));
-			printMembers(removeDuplicateMembers(c.getMethods(), c.getDeclaredMethods()));
+			printClass(c, 0);
 		} catch (ClassNotFoundException e) {
 			System.out.println("unknown class: " + args[0]);
 		}
 	}
 	
+	private static void printClass(Class<?> c, int indent) {
+		for (int i = 0; i < indent; i++)
+			System.out.print("    ");
+		System.out.print(c);
+		System.out.println(" {");
+		printMembers(removeDuplicateMembers(c.getFields(), c.getDeclaredFields()), c.getName() + ".", indent + 1);
+		printMembers(removeDuplicateMembers(c.getConstructors(), c.getDeclaredConstructors()), strip(c.getName(), c.getSimpleName()), indent + 1);
+		printMembers(removeDuplicateMembers(c.getMethods(), c.getDeclaredMethods()), c.getName() + ".", indent + 1);
+		for (Class<?> cls: c.getDeclaredClasses()) {
+			printClass(cls, indent + 1);
+		}
+		for (int i = 0; i < indent; i++)
+			System.out.print("    ");
+		System.out.println("}");
+	}
+	
 	/**
 	 * Objectから継承されているメンバーを除いて，メンバを説明する文字列を表示する。
-	 * @param mems
+	 * @param mems メンバーの配列
+	 * @param prefix クラス名
 	 */
-	private static void printMembers(Member[] mems) {
+	private static void printMembers(Member[] mems, String prefix, int indent) {
 		for (Member m: mems) {
 			if (m.getDeclaringClass() == Object.class)
 				continue;
 			String decl = m.toString();
-			System.out.print("    ");
-			System.out.println(strip(decl, "java.lang."));
+			for (int i = 0; i < indent; i++)
+				System.out.print("    ");
+			System.out.println(strip(strip(decl, "java.lang."), prefix) + ";");
 			printAnnotation(m);
 		}
 	}
@@ -55,62 +70,7 @@ public class ClassContents {
 		}
 			
 	}
-	
-	/**
-	 * 指定されたクラス名の完全な宣言を表示する
-	 * @param className
-	 */
-	private static void printClass(String className) {
-		
-	}
-	
-	/**
-	 * ジェネリクスを表示する
-	 */
-	private static void printGenerics() {
-		
-	}
-	
-	/**
-	 * 与えられたクラスのスーパークラスを表示する
-	 * @param cls
-	 */
-	private static void printSuperClass(Class<?> cls) {
-		
-	}
-	
-	/**
-	 * 与えられたクラスが実装しているインタフェースを表示する
-	 * @param cls
-	 */
-	private static void printInterfaces(Class<?> cls) {
-		
-	}
-	
-	/**
-	 * 与えられたクラスのフィールドを表示する
-	 * @param cls
-	 */
-	private static void printFields(Class<?> cls) {
-		
-	}
-	
-	/**
-	 * 与えられたクラスのコンストラクタを表示する
-	 * @param cls
-	 */
-	private static void printConstructors(Class<?> cls) {
-		
-	}
-	
-	/**
-	 * 与えられたクラスのメソッドを表示する
-	 * @param cls
-	 */
-	private static void printMethods(Class<?> cls) {
-		
-	}
-	
+
 	
 	
 	/**
