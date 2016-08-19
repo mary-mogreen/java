@@ -100,7 +100,8 @@ public class ArrayCreator extends JPanel implements Creator {
 	    createBtn.addActionListener(e -> {
 	    	String ins = insNameField.getText();
 	    	ObjectData od = ObjectData.getInstance();
-	    	if (od.get(ins)) {
+	    	// 配列名に文字列nullを使えないことを追加
+	    	if (od.get(ins) || "null".equals(ins)) {
 	    		ins = "";
 	    	}
 			Class<?> clas = clsNameField.getClassObject();

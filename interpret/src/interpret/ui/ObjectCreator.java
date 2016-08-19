@@ -107,7 +107,8 @@ public class ObjectCreator extends JPanel implements Creator {
 			public void actionPerformed(ActionEvent e) {
 				String ins = insNameField.getText();
 				ObjectData od = ObjectData.getInstance();
-		    	if (od.get(ins)) {
+				// 名前にnullを使えないことを追加。
+		    	if (od.get(ins) || "null".equals(ins)) {
 		    		ins = "";
 		    	}
 				Class<?> cls = clsNameField.getClassObject();
