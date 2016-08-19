@@ -58,8 +58,9 @@ public class ObjectViewer extends JPanel {
 
 	private void setupListener() {
 		methodList.addListener(m -> {
-			paramTable.setClass(m == null ? (Class<?>[]) null : m.getParameterTypes());
+			// 先にinvokeViewにメソッドを追加しておく
 			invokeView.setMethod(m);
+			paramTable.setClass(m == null ? (Class<?>[]) null : m.getParameterTypes());
 		});
 	}
 

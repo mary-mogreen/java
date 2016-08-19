@@ -97,7 +97,13 @@ public class InvokeView extends JPanel {
 
 	public void setParam(int idx, Object param) {
 		params[idx] = param;
-		buffer.append(param == null ? "null " : param.toString()  + " ");
+		// 指摘：invokeの文字列は間違いを消せるように。正しい引数を表示するように変更する。
+		initBuffer();
+		buffer.append(this.method.getName() + " ");
+		for (Object prm: params) {
+			buffer.append(prm == null ? "null " : prm.toString()  + " ");
+		}
+		// buffer.append(param == null ? "null " : param.toString()  + " ");
 		commandField.setText(buffer.toString());
 	}
 }

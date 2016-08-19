@@ -62,6 +62,10 @@ public class ParamTable extends ObjectTable {
 			} else {
 				params[i] = null;
 			}
+			// 初期値生成時にinvokeViewにも反映させるように修正。
+			if(invokeView != null) {
+				invokeView.setParam(i, params[i]);
+			}
 		}
 		updateUI();
 	}
