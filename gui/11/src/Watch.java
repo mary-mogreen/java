@@ -24,7 +24,7 @@ public class Watch extends Frame implements Runnable{
 	static int second;
 
     public static void main(String args[]) {
-    	Watch watch = new Watch("Watch 1-1");
+    	JWatch watch = new JWatch("Watch 1-1");
     	Thread th = new Thread(watch);
 
         watch.setSize(300, 300);
