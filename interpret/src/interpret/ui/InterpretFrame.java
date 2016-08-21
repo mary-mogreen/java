@@ -3,15 +3,23 @@ package interpret.ui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JFrame;
+
+import interpret.AppData;
 import interpret.ui.component.ClosableTabbedPane;
 
 @SuppressWarnings("serial")
 public class InterpretFrame extends JFrame {
 
+	AppData ad = AppData.getInstance();
+	
 	private final InterpretMenuBar menubar = new InterpretMenuBar();
 	
-	private final ClosableTabbedPane tabPane = new ClosableTabbedPane();
+	private final ClosableTabbedPane tabPane = (ClosableTabbedPane)ad.getObject(AppData.TABPANE);
+	
+	
+	
 
 	public InterpretFrame() {
 		setTitle("Interpret");

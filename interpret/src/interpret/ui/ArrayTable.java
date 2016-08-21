@@ -1,9 +1,11 @@
 package interpret.ui;
 
 import java.lang.reflect.Array;
+
 import javax.swing.JLabel;
 import javax.swing.table.AbstractTableModel;
 
+import interpret.ObjectData;
 import interpret.ui.component.InterpretLog;
 import interpret.ui.component.ObjectTable;
 import interpret.util.TypedValue;
@@ -75,6 +77,10 @@ public class ArrayTable extends ObjectTable {
 			case 1:
 				log.append(insName + "[" + i + "] = " + ((TypedValue) value).getValue() + "\n");
 				try {
+					System.out.println("value: " + value + ", " + ((TypedValue) value).getValue());
+					ObjectData od = ObjectData.getInstance();
+					String ins = ((TypedValue) value).getValue().toString();
+					System.out.println(od.getObject(((TypedValue) value).getValue().toString()));
 					Array.set(array, i, ((TypedValue) value).getValue());
 					log.append("" + ((TypedValue) value).getValue());
 				} catch (ArrayStoreException e) {

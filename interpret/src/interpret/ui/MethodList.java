@@ -65,12 +65,11 @@ public class MethodList extends JList<Method> {
 		// 今，ソートしようとしているところ。文字列配列を利用してフィルタリングする予定。
 		for (int i = 0; i < methods.length; i++) {
 			mStrs[i] = methods[i].toString().replaceAll("java\\.lang\\.",  "").replaceAll(".+" + methods[i].getName(), " " + methods[i].getName());
-			System.out.println("mStrs[" + i + "]: " + mStrs[i]);
 		}
+		
 		String[] copy = mStrs.clone();
 		Arrays.sort(mStrs);
-		for (int i = 0; i < mStrs.length; i++)
-			System.out.println("mStrs[" + i + "]: " + mStrs[i]);
+		
 		filteredMethods = new Method[methods.length];
 		for (int i = 0; i < mStrs.length; i++) {
 			for (int j = 0; j < copy.length; j++) {
