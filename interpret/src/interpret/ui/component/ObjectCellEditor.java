@@ -3,6 +3,8 @@ package interpret.ui.component;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 import javax.swing.AbstractCellEditor;
 import javax.swing.BoxLayout;
@@ -38,7 +40,7 @@ public class ObjectCellEditor extends AbstractCellEditor implements TableCellRen
 		TypedValue typedValue = (TypedValue) typedValueObj;
 		final Class<?> type = typedValue.getType();
 		final Object value = typedValue.getValue();
-
+		System.out.println("type: " + type);
 		if (isNumberClass(type)) {
 			return new JLabel(String.valueOf(value));
 		} else if (type == char.class) {
@@ -110,7 +112,21 @@ public class ObjectCellEditor extends AbstractCellEditor implements TableCellRen
 			clsPanel.add(BorderLayout.CENTER, cmb);
 			clsPanel.add(BorderLayout.EAST, paramCreateBtn);
 			String insName = insNameField.getText();
-			
+			clsPanel.addFocusListener(new FocusListener() {
+
+				@Override
+				public void focusGained(FocusEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void focusLost(FocusEvent e) {
+					stopCellEditing();
+					
+				}
+				
+			});
 			paramCreateBtn.addActionListener(e -> {
 				String btnTxt = paramCreateBtn.getText();
 				AppData ad = AppData.getInstance();
@@ -142,7 +158,12 @@ public class ObjectCellEditor extends AbstractCellEditor implements TableCellRen
 			ObjectData od = ObjectData.getInstance();
 			System.out.println(editor.getComponentCount() + " , " + editor.getComponent(0).getClass().getTypeName());
 			// value = od.getObject((String)((JTextField) editor.getComponent(0)).getText());
-			value = od.getObject(((JComboBox) editor.getComponent(0)).getSelectedItem().toString());
+			Object selectedItem = ((JComboBox) editor.getComponent(0)).getSelectedItem();
+			System.out.println("selected Item: " + selectedItem);
+			if (selectedItem == null)
+				value = null;
+			else
+				value = od.getObject(((JComboBox) editor.getComponent(0)).getSelectedItem().toString());
 			// value = null;
 		}
 
