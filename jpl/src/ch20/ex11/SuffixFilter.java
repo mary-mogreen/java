@@ -1,7 +1,7 @@
 /**
  * 
  */
-package ex20.ch11;
+package ch20.ex11;
 
 import java.io.File;
 import java.io.FilenameFilter;
