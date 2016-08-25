@@ -28,6 +28,8 @@ public class InterpretFrame extends JFrame {
 		setLayout(new BorderLayout());
 		getContentPane().add(BorderLayout.NORTH, menubar);
 		getContentPane().add(BorderLayout.CENTER, tabPane);
+		
+		tabPane.removeAll();
 
 		
 		tabPane.addTab("new Object", new ObjectCreator());
