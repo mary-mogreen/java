@@ -1,7 +1,7 @@
 /**
  * 
  */
-package ch22.ex12;
+package ch22.ex13;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -27,7 +27,7 @@ public class AttrScanner {
 	public static void main(String[] args) throws IOException {
 		BufferedReader in = null;
 		try {
-			in = new BufferedReader(new FileReader("/Users/katouyuuya/git/java_training2015/jpl/src/ch22/ex12/test.txt"));
+			in = new BufferedReader(new FileReader("/Users/katouyuuya/git/java_training2015/jpl/src/ch22/ex13/test.txt"));
 			Attributed<String> attrs = readAttr(in);
 			Iterator<AttrAsGeneric<String>> it = attrs.attrs();
 			while (it.hasNext())
@@ -51,7 +51,10 @@ public class AttrScanner {
 		
 		while (in.hasNextLine()) {
 			String[] nameValue = in.nextLine().split("=");
-			attrs.add(new AttrAsGeneric<>(nameValue[0], nameValue[1]));
+			if (nameValue.length == 2) 
+				attrs.add(new AttrAsGeneric<>(nameValue[0], nameValue[1]));
+			else
+				throw new IOException("misplaced '='");
 		}
 
 		return attrs;
