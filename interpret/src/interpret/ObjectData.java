@@ -45,7 +45,8 @@ public class ObjectData {
 	public String[] getSKeys(Class<?> type) {
 		List<String> strs = new ArrayList<String>();
 		for (String s: map.keySet()) {
-			if (type == map.get(s).getClass())
+			// class 一致ではなく，インスタンスであるか判定するように修正
+			if (type.isInstance(map.get(s)))
 				strs.add(s);
 		}
 		return strs.toArray(new String[strs.size()]);

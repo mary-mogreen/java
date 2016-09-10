@@ -68,7 +68,8 @@ public class ParamObjectCreator extends JPanel implements Creator {
 		this(cmb);
 		System.out.println("clsName: " + clsName);
 		clsNameField.setText(clsName);
-		clsNameField.setEditable(false);
+		// ↓修正不可にしていたが，作成できるクラスを変更できた方がいいので Editable に変更
+		// clsNameField.setEditable(false);
 	}
 	
 	private ParamObjectCreator(JComboBox<String> cmb) {
