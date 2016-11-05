@@ -27,10 +27,15 @@ public class GarbageCollectionTest {
 	 */
 	public static void main(String[] args) {
 		checkFreeMemory("起動時");
-		for (int i = 0; i < 1000000; i++) {
-			new String("Number" + i);
+		int size = 1000000;
+		String[] str = new String[size];
+		for (int i = 0; i < size; i++) {
+			str[i] = new String("Number" + i);
 		}
 		checkFreeMemory("オブジェクト生成後");
+		for (int i = 0; i < size; i++)
+			str[i] = null;
+		checkFreeMemory("オブジェクトの参照破棄後");
 		Runtime.getRuntime().gc();
 		checkFreeMemory("GC呼び出し後");
 		
