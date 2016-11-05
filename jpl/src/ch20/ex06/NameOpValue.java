@@ -17,7 +17,8 @@ import java.util.Map;
  * c = 3.8
  */
 public class NameOpValue {
-
+	private static String result;
+	
 	public static void calc(Reader reader) throws IOException {
 		StreamTokenizer in = new StreamTokenizer(reader);
 		Map<String, Double> nameValue = new HashMap<>();
@@ -53,17 +54,29 @@ public class NameOpValue {
 			}
 			
 		}
+		StringBuilder sb = new StringBuilder();
 		for (String n: nameValue.keySet()) {
-			System.out.println(n + " = " + nameValue.get(n));
+			String s = String.format("%s = %s%n", n, nameValue.get(n));
+			sb.append(s);
+			System.out.print(s);
 		}
+		result = sb.toString();
+	}
+	
+	public static String getResult() {
+		if (result == null || result.isEmpty())
+			throw new IllegalStateException("Not calculated.");
+		return result;
 	}
 	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		if (args.length == 0)
+			args = new String[1]; args[0] = "./test.txt";
 		try {
-			calc(new FileReader("/Users/katouyuuya/git/java_training2015/jpl/src/ch20/ex06/test.txt"));
+			calc(new FileReader(args[0]));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
