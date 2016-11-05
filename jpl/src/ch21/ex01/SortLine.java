@@ -33,7 +33,7 @@ public class SortLine {
 					i++;
 				}
 				if (sorted.size() == i)
-					sorted.addLast(line);
+					sorted.add(line);
 			}
 			return sorted;
 
@@ -48,8 +48,11 @@ public class SortLine {
 	}
 	
 	public static void main(String[] args) {
-		
-		String path = "/Users/katouyuuya/git/java_training2015/jpl/src/ch21/ex01/testfile.txt";
+		if (args.length == 0) {
+			args = new String[1];
+			args[0] = "testfile.txt";
+		}
+		String path = args[0];
 		List<String> sortedList = sort(new File(path));
 		for (String str: sortedList)
 			System.out.println("sorted: " + str);
