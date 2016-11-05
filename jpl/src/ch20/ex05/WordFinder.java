@@ -27,7 +27,7 @@ public class WordFinder  {
 		if (args.length != 2) {
 			args = new String[2];
 			args[0] = "args";
-			args[1] =  "/Users/katouyuuya/git/java_training2015/jpl/src/ch20/ex05/WordFinder.java";
+			args[1] =  "./test.txt";
 		}
 			
 		String match = args[0];

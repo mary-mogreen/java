@@ -1,0 +1,19 @@
+public class WordFinder  {
+	
+	public static void main(String[] args) throws IOException {
+		if (args.length != 2) {
+			args = new String[2];
+			args[0] = "args";
+			args[1] =  "./test.txt";
+		}
+			
+		String match = args[0];
+		FileReader fileIn = new FileReader(args[1]);
+		LineNumberReader in = new LineNumberReader(fileIn);
+		String str;
+		while ((str = in.readLine()) != null) {
+			if (str.contains(match))
+				System.out.println(in.getLineNumber() + ": " + str);
+		}
+	} 
+}
