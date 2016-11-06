@@ -20,7 +20,7 @@ public class ALStack<E> {
 	 * @return 追加したオブジェクト
 	 */
 	public E push(E e) {
-		stack.add(e);
+		stack.add(0, e);
 		return e;
 	}
 	
@@ -31,7 +31,7 @@ public class ALStack<E> {
 	public E pop() {
 		if (stack.isEmpty())
 			throw new EmptyStackException();
-		return stack.remove(stack.size() - 1);
+		return stack.remove(0);
 	}
 	
 	/**
