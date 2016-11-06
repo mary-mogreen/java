@@ -59,7 +59,7 @@ public class ArrayBunchList<E> extends AbstractList<E> {
 		return new ABLListIterator();
 	}
 	
-	private class ABLListIterator implements ListIterator<E> {
+	protected class ABLListIterator implements ListIterator<E> {
 
 		private int off; // リストの先頭からのオフセット
 		private int array; // 現在処理している配列
@@ -77,45 +77,63 @@ public class ArrayBunchList<E> extends AbstractList<E> {
 				if (arrays[array].length > 0)
 					break;
 		}
+		/**
+		 * hasNext
+		 */
 		@Override
 		public boolean hasNext() {
-			return off + pos < size();
+			return (off + pos) < size();
 		}
 
 		@Override
 		public E next() {
 			if (!hasNext())
 				throw new NoSuchElementException();
+			
+			if (!hasPrevious()) {
+				array = 0;
+				off = 0;
+			}
+			
 			E ret = arrays[array][pos++];
 			
 			while (pos >= arrays[array].length) {
 				off += arrays[array++].length;
 				pos = 0;
-				if (array >= arrays.length)
+				if (array >= arrays.length) 
 					break;
 			}
 			canSet = true;
+			System.out.printf("[Next] array: %d, pos: %d, off: %d%n", array, pos, off);
 			return ret;
 		}
 
 		@Override
 		public boolean hasPrevious() {
-			return pos != 0;
+			return (pos + off) > 0;
 		}
 
 		@Override
 		public E previous() {
 			if (!hasPrevious())
 				throw new NoSuchElementException();
-			E ret = arrays[array][pos--];
 			
-			while (pos < 0) {
-				off -= arrays[array--].length;
+			if (!hasNext()) {
+				off -= arrays[--array].length;
 				pos = arrays[array].length;
+			}
+			
+			E ret = arrays[array][--pos];
+			System.out.printf("[Previous1] array: %d, pos: %d, off: %d%n", array, pos, off);
+			
+			while (pos <= 0) {
+				off -= arrays[array--].length;
 				if (array <  0)
 					break;
+				pos = arrays[array].length;	
 			}
 			canSet = true;
+			System.out.printf("[Previous2] array: %d, pos: %d, off: %d%n", array, pos, off);
 			return ret;
 		}
 
