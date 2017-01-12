@@ -32,6 +32,8 @@ class DataHandler {
 	 */
 	byte[] readFile(File file) {
 		byte[] data;
+		if (file == null)
+			throw new NullPointerException("file must not be null");
 		
 		// データを記憶しているか調べる
 		if(file.equals(lastFile.get())) {

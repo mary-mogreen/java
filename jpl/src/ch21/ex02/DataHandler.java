@@ -27,7 +27,9 @@ public class DataHandler {
 //		}
 		
 		if (map.containsKey(file)) {
-			return map.get(file); 
+			data = map.get(file);
+			if (data != null)
+				return data;
 		}
 		
 		data = readBytesFromFile(file);

@@ -15,6 +15,7 @@ import java.util.Set;
 /**
  * @author mary-mogreen
  *
+ *　WeakValueMapのValueには null を入れてはいけない。
  */
 public class WeakValueMap<K, V> implements Map<K, V> {
 	private final HashMap<K, WeakReference<V>> map;
@@ -27,10 +28,21 @@ public class WeakValueMap<K, V> implements Map<K, V> {
 		map = new HashMap<>();
 	}
 	
+	/**
+	 * マップを元にWeakValueMapを生成する。
+	 * Valueに null が入っていた場合は生成を破棄する。
+	 * @param m 任意のマップ
+	 * @throws NullPointerException マップの値がnullだったとき
+	 */
 	public WeakValueMap(Map<? extends K, ? extends V> m) {
-		map = new HashMap<>();
-		for (Entry<? extends K, ? extends V> e: m.entrySet())
-			map.put(e.getKey(), new WeakReference<V>(e.getValue()));
+		HashMap<K, WeakReference<V>> tmp = new HashMap<>();
+		for (Entry<? extends K, ? extends V> e: m.entrySet()) {
+			if (e.getValue() == null) {
+				throw new NullPointerException("WeakValueMapの値にnullは認めない");
+			}
+			tmp.put(e.getKey(), new WeakReference<V>(e.getValue()));
+		}
+		map = tmp;
 	}
 
 	@Override
@@ -51,12 +63,16 @@ public class WeakValueMap<K, V> implements Map<K, V> {
 	@Override
 	public boolean containsValue(Object value) {
 		for (WeakReference<V> v: map.values()) {
-			if (v.get().equals(value))
+			// v.getはnullの可能性がある
+			if (v.get() != null && v.get().equals(value))
 				return true;
 		}
 		return false;
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public V get(Object key) {
 		WeakReference<V> v = map.get(key);

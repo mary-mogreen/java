@@ -11,7 +11,7 @@ public class RegexpBenchmark {
 	
 	
 	private static final int COUNT = 100000; 
-	
+    
 	private static long match(String csvStr, String regex) {
 		long start = System.currentTimeMillis();
 		for (int i = 0; i < COUNT; i++) {
